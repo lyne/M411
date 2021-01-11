@@ -17,6 +17,12 @@ import org.json.JSONObject;
  * @since   11.01.2021
  */
 public class Api {
+    /**
+     * Method for lopping trough
+     * @param rd
+     * @return
+     * @throws IOException
+     */
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -26,6 +32,13 @@ public class Api {
         return sb.toString();
     }
 
+    /**
+     * Method to read from BufferedReader
+     * @param url
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
     public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
         InputStream is = new URL(url).openStream();
         try {
