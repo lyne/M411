@@ -1,4 +1,4 @@
-package ch.tbz.m411;
+package ch.tbz.m411.api;
 
 import java.io.BufferedReader;
 import java.io.IOException;
