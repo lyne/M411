@@ -12,7 +12,6 @@ public class InteractiveTUI {
     protected BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public InteractiveTUI() {
-        
     }
 
     /**
