@@ -54,7 +54,7 @@ public class Api {
         }
     }
 
-    public static void jsonToMap(String t) throws JSONException {
+    public static void loadBeerStyles(String t) throws JSONException {
 
         HashMap<String, String> map = new HashMap<String, String>();
         JSONObject jObject = new JSONObject(t);
@@ -85,6 +85,6 @@ public class Api {
         System.out.println(apiUrl + apiKey + styleId);
         JSONObject json = readJsonFromUrl(apiUrl + apiKey + styleId);
         System.out.println(json.toString());
-        jsonToMap("{\"test1\":\"1\",\"test2\":\"2\"}");
+        loadBeerStyles("{\"test1\":\"1\",\"test2\":\"2\"}");
     }
 }
