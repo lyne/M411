@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 /**
@@ -51,6 +54,36 @@ public class Api {
         }
     }
 
+    public static void loadBeerStyles(JSONObject t) throws JSONException {
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        JSONObject jObject = new JSONObject(t);
+        Iterator<?> keys = jObject.keys();
+
+        while( keys.hasNext() ){
+            String key = (String)keys.next();
+            String value = jObject.getString(key);
+            map.put(key, value);
+
+        }
+
+      /*  System.out.println("json : "+jObject);
+        System.out.println("map : "+map);
+      */
+    }
+
+    public static void printBeerStyles() throws JSONException {
+
+    }
+
+    public static void printBeerStyles(String search) {
+
+    }
+
+    public static void getBeerListForStyle(int idStyle) {
+
+    }
+
     /**
      * Example of Call
      * @param args
@@ -65,5 +98,7 @@ public class Api {
         System.out.println(apiUrl + apiKey + styleId);
         JSONObject json = readJsonFromUrl(apiUrl + apiKey + styleId);
         System.out.println(json.toString());
-    } */
+        loadBeerStyles(json);
+    }
+    */
 }
