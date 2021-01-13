@@ -54,7 +54,7 @@ public class Api {
         }
     }
 
-    public static void loadBeerStyles(String t) throws JSONException {
+    public static void loadBeerStyles(JSONObject t) throws JSONException {
 
         HashMap<String, String> map = new HashMap<String, String>();
         JSONObject jObject = new JSONObject(t);
@@ -67,8 +67,21 @@ public class Api {
 
         }
 
-        System.out.println("json : "+jObject);
+      /*  System.out.println("json : "+jObject);
         System.out.println("map : "+map);
+      */
+    }
+
+    public static void printBeerStyles() throws JSONException {
+
+    }
+
+    public static void printBeerStyles(String search) {
+
+    }
+
+    public static void getBeerListForStyle(int idStyle) {
+
     }
 
     /**
@@ -76,7 +89,7 @@ public class Api {
      * @param args
      * @throws IOException
      * @throws JSONException
-    */
+
     public static void main(String[] args) throws IOException, JSONException {
         String apiUrl = "http://api.brewerydb.com/v2/beers";
         String apiKey = "?key=1511d0db4a1d6841481c672455358cff";
@@ -85,6 +98,7 @@ public class Api {
         System.out.println(apiUrl + apiKey + styleId);
         JSONObject json = readJsonFromUrl(apiUrl + apiKey + styleId);
         System.out.println(json.toString());
-        loadBeerStyles("{\"test1\":\"1\",\"test2\":\"2\"}");
+        loadBeerStyles(json);
     }
+    */
 }
