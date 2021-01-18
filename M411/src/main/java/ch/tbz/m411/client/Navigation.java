@@ -31,11 +31,11 @@ public class Navigation extends InteractiveTUI {
             String action = interactive(false);
             switch (action) {
                 case "ls":
-                    System.out.println("========== LIST BEERS ==========");
+                    System.out.println("========== LIST BEER STYLES ==========");
                     admin.printBeerStyles();
                     break;
                 case "ss":
-                    System.out.println("========== SEARCH BEERS ==========");
+                    System.out.println("========== SEARCH BEER STYLES ==========");
                     System.out.println("Search > ");
                     String search = interactive(true);
                     admin.printBeerStyles(search);
