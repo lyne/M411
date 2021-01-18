@@ -1,30 +1,29 @@
 package ch.tbz.m411.api;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 /**
  * Connection to Api
  *
- * @author  Alessio Carcavallo
+ * @author Alessio Carcavallo
  * @version 1.0
- * @since   11.01.2021
+ * @since 11.01.2021
  */
 public class BeerAdmin {
     private Map<String, String> beerStyles = new HashMap<>();
+
     /**
      * Method for lopping trough
+     *
      * @param rd
      * @return
      * @throws IOException
@@ -40,6 +39,7 @@ public class BeerAdmin {
 
     /**
      * Method to read from BufferedReader
+     *
      * @param url
      * @return
      * @throws IOException
@@ -66,7 +66,7 @@ public class BeerAdmin {
             for (Iterator<Object> it = data.iterator(); it.hasNext(); ) {
                 Object obj = it.next();
                 if (obj instanceof JSONObject) {
-                    JSONObject beer = (JSONObject)obj;
+                    JSONObject beer = (JSONObject) obj;
                     beerStyles.put(beer.getString("id"), beer.getString("name"));
                 }
             }
@@ -76,14 +76,14 @@ public class BeerAdmin {
     }
 
     public void printBeerStyles() throws JSONException {
-        for (String id: beerStyles.keySet()) {
+        for (String id : beerStyles.keySet()) {
             String name = beerStyles.get(id);
             System.out.println(id + "::" + name);
         }
     }
 
     public void printBeerStyles(String search) {
-        for (String id:beerStyles.keySet()) {
+        for (String id : beerStyles.keySet()) {
             String name = beerStyles.get(id);
             if (name.toLowerCase().contains(search.toLowerCase()))
                 System.out.println(id + "::" + name);

@@ -1,5 +1,6 @@
 package ch.tbz.m411.client;
 
+import ch.tbz.m411.api.BeerAdmin;
 import ch.tbz.m411.exceptions.CancelException;
 
 /**
@@ -7,8 +8,10 @@ import ch.tbz.m411.exceptions.CancelException;
  */
 public class Navigation extends InteractiveTUI {
 
-    public Navigation() {
-        menu();
+    private final BeerAdmin admin;
+
+    public Navigation(BeerAdmin admin) {
+        this.admin = admin;
     }
 
     /**
@@ -17,18 +20,34 @@ public class Navigation extends InteractiveTUI {
     public void menu() {
         try {
             System.out.println("========== MAIN MENU ==========");
-            System.out.println("t) Search for text");
-            System.out.println("l) Search locals");
+            System.out.println("ls) List beer styles");
+            System.out.println("ss) Search beer styles");
+            System.out.println("lb) List beers in local cache");
+            System.out.println("vb) View beer in local cache");
+            System.out.println("lr) List breweries");
             System.out.println("x) Exit");
             System.out.print("> ");
 
             String action = interactive(false);
             switch (action) {
-                case "t":
-                    // TODO: Search for text
+                case "ls":
+                    System.out.println("========== LIST BEER STYLES ==========");
+                    admin.printBeerStyles();
                     break;
-                case "l":
-                    // TODO: Search locals
+                case "ss":
+                    System.out.println("========== SEARCH BEER STYLES ==========");
+                    System.out.println("Search > ");
+                    String search = interactive(true);
+                    admin.printBeerStyles(search);
+                    break;
+                case "lb":
+                    // TODO: List beers in local cache
+                    break;
+                case "vb":
+                    // TODO: View beer in local cache
+                    break;
+                case "lr":
+                    // TODO: List breweries in local cache
                     break;
                 case "x":
                     System.out.println("Goodbye!");
