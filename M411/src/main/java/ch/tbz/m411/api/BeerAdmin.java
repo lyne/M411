@@ -78,7 +78,11 @@ public class BeerAdmin {
     }
 
     public static void printBeerStyles() throws JSONException {
-
+        Map<String, String> beerstyles = loadBeerStyles();
+        for (String id:beerstyles.keySet()) {
+            String name = beerstyles.get(id);
+            System.out.println(id + "::" + name);
+        }
     }
 
     public static void printBeerStyles(String search) {
@@ -96,11 +100,7 @@ public class BeerAdmin {
      * @throws JSONException
 
     public static void main(String[] args) throws IOException, JSONException {
-        Map<String, String> beerstyles = loadBeerStyles();
-        for (String id:beerstyles.keySet()) {
-            String name = beerstyles.get(id);
-            System.out.println(id + ":" + name);
-        }
+
     }
     */
 }
