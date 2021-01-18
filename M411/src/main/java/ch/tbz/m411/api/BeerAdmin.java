@@ -22,6 +22,7 @@ import org.json.JSONObject;
  * @since   11.01.2021
  */
 public class BeerAdmin {
+    private static Map<String, String> beerStyles = new HashMap<>();
     /**
      * Method for lopping trough
      * @param rd
@@ -56,11 +57,9 @@ public class BeerAdmin {
         }
     }
 
-    public static HashMap<String, String> loadBeerStyles() throws JSONException {
-
+    public static void loadBeerStyles() throws JSONException {
         String apiUrl = "http://api.brewerydb.com/v2/beers";
         String apiKey = "?key=1511d0db4a1d6841481c672455358cff";
-        HashMap<String, String> beerstyles = new HashMap<String, String>();
         try {
             JSONObject json = readJsonFromUrl(apiUrl + apiKey);
             JSONArray data = json.getJSONArray("data");
@@ -68,20 +67,27 @@ public class BeerAdmin {
                 Object obj = it.next();
                 if (obj instanceof JSONObject) {
                     JSONObject beer = (JSONObject)obj;
-                    beerstyles.put(beer.getString("id"), beer.getString("name"));
+                    beerStyles.put(beer.getString("id"), beer.getString("name"));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return beerstyles;
     }
 
     public static void printBeerStyles() throws JSONException {
-
+        for (String id: beerStyles.keySet()) {
+            String name = beerStyles.get(id);
+            System.out.println(id + "::" + name);
+        }
     }
 
     public static void printBeerStyles(String search) {
+        for (String id:beerStyles.keySet()) {
+            String name = beerStyles.get(id);
+            if (name.toLowerCase().contains(search.toLowerCase()))
+                System.out.println(id + "::" + name);
+        }
 
     }
 
@@ -96,11 +102,8 @@ public class BeerAdmin {
      * @throws JSONException
 
     public static void main(String[] args) throws IOException, JSONException {
-        Map<String, String> beerstyles = loadBeerStyles();
-        for (String id:beerstyles.keySet()) {
-            String name = beerstyles.get(id);
-            System.out.println(id + ":" + name);
-        }
+        loadBeerStyles();
+        printBeerStyles("16 So Fine Red Wheat Wine");
     }
     */
 }
