@@ -51,7 +51,10 @@ public class Navigation extends BaseNavigation {
                     // TODO: List beers in local cache
                     break;
                 case "vb":
-                    // TODO: View beer in local cache
+                    System.out.println("========== VIEW BEERS IN CACHE ==========");
+                    System.out.println("Beer ID > ");
+                    String beerId = interactiveBeerId(true);
+                    // TODO: Print beer
                     break;
                 case "lr":
                     // TODO: List breweries in local cache
