@@ -22,11 +22,15 @@ import java.util.Map;
 public class BeerAdmin {
 
     public static final String API_URL = "http://api.brewerydb.com/v2/";
+    public static final String API_KEY = "?key=1511d0db4a1d6841481c672455358cff";
 
     @Getter
     private Map<String, String> beerStyles = new HashMap<>();
     @Getter
     private Map<String, Beer> beers = new HashMap<>();
+    @Getter
+    private Map<String, String> breweries = new HashMap<>();
+
     /**
      * Method for lopping trough
      *
@@ -68,16 +72,15 @@ public class BeerAdmin {
      * @throws JSONException
      */
     public void loadBeerStyles() throws JSONException {
-        String apiUrl = API_URL + "/beers";
-        String apiKey = "?key=1511d0db4a1d6841481c672455358cff";
+        String call = API_URL + "/beers";
         try {
-            JSONObject json = readJsonFromUrl(apiUrl + apiKey);
+            JSONObject json = readJsonFromUrl(call + API_KEY);
             JSONArray data = json.getJSONArray("data");
             for (Iterator<Object> it = data.iterator(); it.hasNext(); ) {
                 Object obj = it.next();
                 if (obj instanceof JSONObject) {
-                    JSONObject beer = (JSONObject) obj;
-                    beerStyles.put(beer.getString("id"), beer.getString("name"));
+                    JSONObject beerStyle = (JSONObject) obj;
+                    beerStyles.put(beerStyle.getString("id"), beerStyle.getString("name"));
                 }
             }
         } catch (IOException e) {
@@ -98,12 +101,11 @@ public class BeerAdmin {
             if (name.toLowerCase().contains(search.toLowerCase()))
                 System.out.println(id + "::" + name);
         }
-
     }
 
     public void getBeerListForStyle(int idStyle) {
         try {
-            String call = API_URL + "/beers?key=1511d0db4a1d6841481c672455358cff&style=" + idStyle;
+            String call = API_URL + "/beers" + API_KEY + "&style=" + idStyle;
             JSONObject json = readJsonFromUrl(call);
             JSONArray data = json.getJSONArray("data");
             for (Iterator<Object> it = data.iterator(); it.hasNext(); ) {
@@ -119,6 +121,7 @@ public class BeerAdmin {
             e.printStackTrace();
         }
     }
+
     public void printBeerList() {
         for (String id : beers.keySet()) {
             Beer beer = beers.get(id);
@@ -130,5 +133,29 @@ public class BeerAdmin {
         Beer beer = beers.get(id);
         System.out.println(beer.getId() + "::" + beer.getName());
         System.out.println(beer.getDescription());
+    }
+
+    public void getBreweries() {
+        try {
+            String call = API_URL + "/breweries" + API_KEY;
+            JSONObject json = readJsonFromUrl(call);
+            JSONArray data = json.getJSONArray("data");
+            for (Iterator<Object> it = data.iterator(); it.hasNext(); ) {
+                Object obj = it.next();
+                if (obj instanceof JSONObject) {
+                    JSONObject brewery = (JSONObject) obj;
+                    breweries.put(brewery.getString("id"), brewery.getString("name"));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void printBreweries() {
+        for (String id : breweries.keySet()) {
+            String name = breweries.get(id);
+            System.out.println(id + "::" + name);
+        }
     }
 }
