@@ -15,10 +15,11 @@ public class Beer {
     private final int idStyle;
 
     public Beer(JSONObject obj) {
+        System.out.println(obj.toString());
         this.id = obj.getString("id");
         this.name = obj.getString("name");
-        this.description = obj.getString("description");
-        this.idStyle = obj.getInt("styleId");
+        this.description = obj.has("description") ? obj.getString("description") : null;
+        this.idStyle = obj.has("styleId") ? obj.getInt("styleId") : -1;
     }
 
     public Beer(String id, String name, String description, int idStyle) {

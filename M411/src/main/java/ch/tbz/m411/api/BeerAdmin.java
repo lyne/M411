@@ -117,4 +117,16 @@ public class BeerAdmin {
             e.printStackTrace();
         }
     }
+    public void printBeerList() {
+        for (String id : beers.keySet()) {
+            Beer beer = beers.get(id);
+            System.out.println(id + "::" + beer.getName());
+        }
+    }
+
+    public void printBeer(String id) {
+        Beer beer = beers.get(id);
+        System.out.println(beer.getId() + "::" + beer.getName());
+        System.out.println("\n" + beer.getDescription());
+    }
 }
