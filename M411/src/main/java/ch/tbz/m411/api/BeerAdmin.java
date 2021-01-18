@@ -22,6 +22,7 @@ import org.json.JSONObject;
  * @since 11.01.2021
  */
 public class BeerAdmin {
+    public static final String API_URL = "http://api.brewerydb.com/v2/";
     private Map<String, String> beerStyles = new HashMap<>();
     private Map<String, Beer> beers = new HashMap<>();
     /**
@@ -65,7 +66,7 @@ public class BeerAdmin {
      * @throws JSONException
      */
     public void loadBeerStyles() throws JSONException {
-        String apiUrl = "http://api.brewerydb.com/v2/beers";
+        String apiUrl = API_URL + "/beers";
         String apiKey = "?key=1511d0db4a1d6841481c672455358cff";
         try {
             JSONObject json = readJsonFromUrl(apiUrl + apiKey);
@@ -100,7 +101,7 @@ public class BeerAdmin {
 
     public void getBeerListForStyle(int idStyle) {
         try {
-            String call = "http://api.brewerydb.com/v2/beers?key=1511d0db4a1d6841481c672455358cff&style=" + idStyle;
+            String call = API_URL + "/beers?key=1511d0db4a1d6841481c672455358cff&style=" + idStyle;
             JSONObject json = readJsonFromUrl(call);
             JSONArray data = json.getJSONArray("data");
             for (Iterator<Object> it = data.iterator(); it.hasNext(); ) {
