@@ -1,5 +1,6 @@
 package ch.tbz.m411.api;
 
+import ch.tbz.m411.beer.Beer;
 import lombok.Getter;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,10 +12,6 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import ch.tbz.m411.beer.Beer;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 /**
  * Connection to Api
  *
@@ -132,6 +129,6 @@ public class BeerAdmin {
     public void printBeer(String id) {
         Beer beer = beers.get(id);
         System.out.println(beer.getId() + "::" + beer.getName());
-        System.out.println("\n" + beer.getDescription());
+        System.out.println(beer.getDescription());
     }
 }

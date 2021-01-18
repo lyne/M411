@@ -15,7 +15,6 @@ public class Beer {
     private final int idStyle;
 
     public Beer(JSONObject obj) {
-        System.out.println(obj.toString());
         this.id = obj.getString("id");
         this.name = obj.getString("name");
         this.description = obj.has("description") ? obj.getString("description") : null;

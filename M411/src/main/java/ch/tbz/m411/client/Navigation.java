@@ -35,26 +35,27 @@ public class Navigation extends BaseNavigation {
                     break;
                 case "ss":
                     System.out.println("========== SEARCH BEER STYLES ==========");
-                    System.out.println("Search > ");
+                    System.out.print("Search > ");
                     String search = interactive(true);
                     admin.printBeerStyles(search);
                     break;
                 case "lbfs":
                     System.out.println("========== LOAD BEERS FOR STYLE ==========");
-                    System.out.println("Style ID > ");
+                    System.out.print("Style ID > ");
                     int styleId = interactiveInt(true);
                     System.out.println("Loading beers for style \"" + styleId + "\"...");
                     admin.getBeerListForStyle(styleId);
                     System.out.println("Successfully loaded beers!");
                     break;
                 case "lb":
-                    // TODO: List beers in local cache
+                    System.out.println("========== LIST BEERS IN CACHE ==========");
+                    admin.printBeerList();
                     break;
                 case "vb":
-                    System.out.println("========== VIEW BEERS IN CACHE ==========");
-                    System.out.println("Beer ID > ");
+                    System.out.println("========== VIEW BEER IN CACHE ==========");
+                    System.out.print("Beer ID > ");
                     String beerId = interactiveBeerId(true);
-                    // TODO: Print beer
+                    admin.printBeer(beerId);
                     break;
                 case "lr":
                     // TODO: List breweries in local cache
