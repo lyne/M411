@@ -1,5 +1,7 @@
 package ch.tbz.m411.api;
 
+import ch.tbz.m411.beer.Beer;
+import lombok.Getter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,10 +12,6 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import ch.tbz.m411.beer.Beer;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 /**
  * Connection to Api
  *
@@ -22,8 +20,12 @@ import org.json.JSONObject;
  * @since 11.01.2021
  */
 public class BeerAdmin {
+
     public static final String API_URL = "http://api.brewerydb.com/v2/";
+
+    @Getter
     private Map<String, String> beerStyles = new HashMap<>();
+    @Getter
     private Map<String, Beer> beers = new HashMap<>();
     /**
      * Method for lopping trough
@@ -127,6 +129,6 @@ public class BeerAdmin {
     public void printBeer(String id) {
         Beer beer = beers.get(id);
         System.out.println(beer.getId() + "::" + beer.getName());
-        System.out.println("\n" + beer.getDescription());
+        System.out.println(beer.getDescription());
     }
 }

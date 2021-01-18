@@ -6,12 +6,10 @@ import ch.tbz.m411.exceptions.CancelException;
 /**
  * The main navigation client for the user.
  */
-public class Navigation extends InteractiveTUI {
-
-    private final BeerAdmin admin;
+public class Navigation extends BaseNavigation {
 
     public Navigation(BeerAdmin admin) {
-        this.admin = admin;
+        super(admin);
     }
 
     /**
@@ -22,6 +20,7 @@ public class Navigation extends InteractiveTUI {
             System.out.println("========== MAIN MENU ==========");
             System.out.println("ls) List beer styles");
             System.out.println("ss) Search beer styles");
+            System.out.println("lbfs) Load beers for style");
             System.out.println("lb) List beers in local cache");
             System.out.println("vb) View beer in local cache");
             System.out.println("lr) List breweries");
@@ -36,15 +35,27 @@ public class Navigation extends InteractiveTUI {
                     break;
                 case "ss":
                     System.out.println("========== SEARCH BEER STYLES ==========");
-                    System.out.println("Search > ");
+                    System.out.print("Search > ");
                     String search = interactive(true);
                     admin.printBeerStyles(search);
                     break;
+                case "lbfs":
+                    System.out.println("========== LOAD BEERS FOR STYLE ==========");
+                    System.out.print("Style ID > ");
+                    int styleId = interactiveInt(true);
+                    System.out.println("Loading beers for style \"" + styleId + "\"...");
+                    admin.getBeerListForStyle(styleId);
+                    System.out.println("Successfully loaded beers!");
+                    break;
                 case "lb":
-                    // TODO: List beers in local cache
+                    System.out.println("========== LIST BEERS IN CACHE ==========");
+                    admin.printBeerList();
                     break;
                 case "vb":
-                    // TODO: View beer in local cache
+                    System.out.println("========== VIEW BEER IN CACHE ==========");
+                    System.out.print("Beer ID > ");
+                    String beerId = interactiveBeerId(true);
+                    admin.printBeer(beerId);
                     break;
                 case "lr":
                     // TODO: List breweries in local cache
