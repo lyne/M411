@@ -9,7 +9,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 /**
@@ -19,7 +21,7 @@ import org.json.JSONObject;
  * @version 1.0
  * @since   11.01.2021
  */
-public class Api {
+public class BeerAdmin {
     /**
      * Method for lopping trough
      * @param rd
@@ -54,22 +56,25 @@ public class Api {
         }
     }
 
-    public static void loadBeerStyles(JSONObject t) throws JSONException {
+    public static HashMap<String, String> loadBeerStyles() throws JSONException {
 
-        HashMap<String, String> map = new HashMap<String, String>();
-        JSONObject jObject = new JSONObject(t);
-        Iterator<?> keys = jObject.keys();
-
-        while( keys.hasNext() ){
-            String key = (String)keys.next();
-            String value = jObject.getString(key);
-            map.put(key, value);
-
+        String apiUrl = "http://api.brewerydb.com/v2/beers";
+        String apiKey = "?key=1511d0db4a1d6841481c672455358cff";
+        HashMap<String, String> beerstyles = new HashMap<String, String>();
+        try {
+            JSONObject json = readJsonFromUrl(apiUrl + apiKey);
+            JSONArray data = json.getJSONArray("data");
+            for (Iterator<Object> it = data.iterator(); it.hasNext(); ) {
+                Object obj = it.next();
+                if (obj instanceof JSONObject) {
+                    JSONObject beer = (JSONObject)obj;
+                    beerstyles.put(beer.getString("id"), beer.getString("name"));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-      /*  System.out.println("json : "+jObject);
-        System.out.println("map : "+map);
-      */
+        return beerstyles;
     }
 
     public static void printBeerStyles() throws JSONException {
@@ -91,14 +96,11 @@ public class Api {
      * @throws JSONException
 
     public static void main(String[] args) throws IOException, JSONException {
-        String apiUrl = "http://api.brewerydb.com/v2/beers";
-        String apiKey = "?key=1511d0db4a1d6841481c672455358cff";
-        String styleId = "&styleId=5";
-
-        System.out.println(apiUrl + apiKey + styleId);
-        JSONObject json = readJsonFromUrl(apiUrl + apiKey + styleId);
-        System.out.println(json.toString());
-        loadBeerStyles(json);
+        Map<String, String> beerstyles = loadBeerStyles();
+        for (String id:beerstyles.keySet()) {
+            String name = beerstyles.get(id);
+            System.out.println(id + ":" + name);
+        }
     }
     */
 }
