@@ -1,5 +1,6 @@
 package ch.tbz.m411.api;
 
+import lombok.Getter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,9 @@ import org.json.JSONObject;
  * @since 11.01.2021
  */
 public class BeerAdmin {
+    @Getter
     private Map<String, String> beerStyles = new HashMap<>();
+    @Getter
     private Map<String, Beer> beers = new HashMap<>();
     /**
      * Method for lopping trough

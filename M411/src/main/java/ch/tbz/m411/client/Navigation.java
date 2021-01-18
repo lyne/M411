@@ -6,12 +6,10 @@ import ch.tbz.m411.exceptions.CancelException;
 /**
  * The main navigation client for the user.
  */
-public class Navigation extends InteractiveTUI {
-
-    private final BeerAdmin admin;
+public class Navigation extends BaseNavigation {
 
     public Navigation(BeerAdmin admin) {
-        this.admin = admin;
+        super(admin);
     }
 
     /**
@@ -43,9 +41,11 @@ public class Navigation extends InteractiveTUI {
                     break;
                 case "lbfs":
                     System.out.println("========== LOAD BEERS FOR STYLE ==========");
-                    System.out.println("Search > ");
-                    String search = interactive(true);
-                    admin.printBeerStyles(search);
+                    System.out.println("Style ID > ");
+                    int styleId = interactiveInt(true);
+                    System.out.println("Loading beers for style \"" + styleId + "\"...");
+                    admin.getBeerListForStyle(styleId);
+                    System.out.println("Successfully loaded beers!");
                     break;
                 case "lb":
                     // TODO: List beers in local cache
