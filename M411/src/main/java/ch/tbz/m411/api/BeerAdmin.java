@@ -10,7 +10,10 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
+import ch.tbz.m411.beer.Beer;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 /**
  * Connection to Api
  *
@@ -20,13 +23,13 @@ import java.util.Map;
  */
 public class BeerAdmin {
     private Map<String, String> beerStyles = new HashMap<>();
-
+    private Map<String, Beer> beers = new HashMap<>();
     /**
      * Method for lopping trough
      *
      * @param rd
-     * @return
-     * @throws IOException
+     * @return The StringBuilder toString()
+     * @throws IOException when there's an error reading the response
      */
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -42,8 +45,8 @@ public class BeerAdmin {
      *
      * @param url
      * @return
-     * @throws IOException
-     * @throws JSONException
+     * @throws IOException when there's an error reading the response
+     * @throws JSONException when there's an invalid body returned
      */
     public JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
         InputStream is = new URL(url).openStream();
@@ -57,6 +60,10 @@ public class BeerAdmin {
         }
     }
 
+    /**
+     * Method to load all Beer Styles
+     * @throws JSONException
+     */
     public void loadBeerStyles() throws JSONException {
         String apiUrl = "http://api.brewerydb.com/v2/beers";
         String apiKey = "?key=1511d0db4a1d6841481c672455358cff";
@@ -91,7 +98,23 @@ public class BeerAdmin {
 
     }
 
-    public void getBeerListForStyle(int idStyle) {
+    public void getBeerListForStyle(int idStyle) throws IOException {
+        try {
+            String call = "http://api.brewerydb.com/v2/beers?key=1511d0db4a1d6841481c672455358cff&style=" + idStyle;
+            JSONObject json = readJsonFromUrl(call);
+            JSONArray data = json.getJSONArray("data");
+            for (Iterator<Object> it = data.iterator(); it.hasNext(); ) {
+                Object obj = it.next();
+                if (obj instanceof JSONObject) {
+                    JSONObject beerObj = (JSONObject)obj;
+                    Beer beer = new Beer(beerObj);
+                    beers.put(beer.getId(), beer);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
