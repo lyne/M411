@@ -22,6 +22,7 @@ public class Navigation extends InteractiveTUI {
             System.out.println("========== MAIN MENU ==========");
             System.out.println("ls) List beer styles");
             System.out.println("ss) Search beer styles");
+            System.out.println("lbfs) Load beers for style");
             System.out.println("lb) List beers in local cache");
             System.out.println("vb) View beer in local cache");
             System.out.println("lr) List breweries");
@@ -36,6 +37,12 @@ public class Navigation extends InteractiveTUI {
                     break;
                 case "ss":
                     System.out.println("========== SEARCH BEER STYLES ==========");
+                    System.out.println("Search > ");
+                    String search = interactive(true);
+                    admin.printBeerStyles(search);
+                    break;
+                case "lbfs":
+                    System.out.println("========== LOAD BEERS FOR STYLE ==========");
                     System.out.println("Search > ");
                     String search = interactive(true);
                     admin.printBeerStyles(search);
