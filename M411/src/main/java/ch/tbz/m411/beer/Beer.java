@@ -1,6 +1,7 @@
 package ch.tbz.m411.beer;
 
 import lombok.Getter;
+import org.json.JSONObject;
 
 public class Beer {
 
@@ -12,6 +13,13 @@ public class Beer {
     private final String description;
     @Getter
     private final int idStyle;
+
+    public Beer(JSONObject obj) {
+        this.id = obj.getString("id");
+        this.name = obj.getString("name");
+        this.description = obj.getString("description");
+        this.idStyle = obj.getInt("styleId");
+    }
 
     public Beer(String id, String name, String description, int idStyle) {
         this.id = id;
