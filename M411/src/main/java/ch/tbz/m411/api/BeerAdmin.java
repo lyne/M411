@@ -98,7 +98,7 @@ public class BeerAdmin {
 
     }
 
-    public void getBeerListForStyle(int idStyle) throws IOException {
+    public void getBeerListForStyle(int idStyle) {
         try {
             String call = "http://api.brewerydb.com/v2/beers?key=1511d0db4a1d6841481c672455358cff&style=" + idStyle;
             JSONObject json = readJsonFromUrl(call);
@@ -115,6 +115,5 @@ public class BeerAdmin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
