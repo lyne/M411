@@ -21,7 +21,7 @@ import org.json.JSONObject;
  * @version 1.0
  * @since   11.01.2021
  */
-public class Api {
+public class BeerAdmin {
     /**
      * Method for lopping trough
      * @param rd
