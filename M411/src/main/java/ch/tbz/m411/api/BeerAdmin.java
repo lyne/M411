@@ -71,7 +71,7 @@ public class BeerAdmin {
     /**
      * Method to load all Beer Styles
      *
-     * @throws JSONException
+     * @throws JSONException when there's an invalid body returned
      */
     public void loadBeerStyles() throws JSONException {
         String call = API_URL + "/beers";
@@ -90,6 +90,11 @@ public class BeerAdmin {
         }
     }
 
+    /**
+     * Method to print all beer styles
+     *
+     * @throws JSONException check if invalid body returned
+     */
     public void printBeerStyles() throws JSONException {
         for (String id : beerStyles.keySet()) {
             String name = beerStyles.get(id);
@@ -97,6 +102,11 @@ public class BeerAdmin {
         }
     }
 
+    /**
+     * Method for printing beer styles with param search
+     *
+     * @param search
+     */
     public void printBeerStyles(String search) {
         for (String id : beerStyles.keySet()) {
             String name = beerStyles.get(id);
@@ -105,6 +115,11 @@ public class BeerAdmin {
         }
     }
 
+    /**
+     * Method for getting specific beer list with param id
+     *
+     * @param idStyle
+     */
     public void getBeerListForStyle(int idStyle) {
         try {
             String call = API_URL + "/beers" + API_KEY + "&style=" + idStyle;
@@ -124,6 +139,10 @@ public class BeerAdmin {
         }
     }
 
+    /**
+     * Method for printing beer list to console
+     *
+     */
     public void printBeerList() {
         for (String id : beers.keySet()) {
             Beer beer = beers.get(id);
@@ -131,12 +150,21 @@ public class BeerAdmin {
         }
     }
 
+    /**
+     * Method for printing specific beer with param id
+     *
+     * @param id
+     */
     public void printBeer(String id) {
         Beer beer = beers.get(id);
         System.out.println(beer.getId() + "::" + beer.getName());
         System.out.println(beer.getDescription());
     }
 
+    /**
+     * Method which calls the api for all breweries
+     *
+     */
     public void getBreweries() {
         try {
             String call = API_URL + "/breweries" + API_KEY;
@@ -154,6 +182,10 @@ public class BeerAdmin {
         }
     }
 
+    /**
+     * Method for printing all Breweries to the console
+     *
+     */
     public void printBreweries() {
         for (String id : breweries.keySet()) {
             String name = breweries.get(id);
