@@ -58,7 +58,8 @@ public class Navigation extends BaseNavigation {
                     admin.printBeer(beerId);
                     break;
                 case "lr":
-                    // TODO: List breweries in local cache
+                    System.out.println("========== LIST BREWERIES IN CACHE ==========");
+                    admin.printBreweries();
                     break;
                 case "x":
                     System.out.println("Goodbye!");

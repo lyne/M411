@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 /**
  * Connection to Api
  *
@@ -52,7 +53,7 @@ public class BeerAdmin {
      *
      * @param url
      * @return
-     * @throws IOException when there's an error reading the response
+     * @throws IOException   when there's an error reading the response
      * @throws JSONException when there's an invalid body returned
      */
     public JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
@@ -127,7 +128,7 @@ public class BeerAdmin {
             for (Iterator<Object> it = data.iterator(); it.hasNext(); ) {
                 Object obj = it.next();
                 if (obj instanceof JSONObject) {
-                    JSONObject beerObj = (JSONObject)obj;
+                    JSONObject beerObj = (JSONObject) obj;
                     Beer beer = new Beer(beerObj);
                     beers.put(beer.getId(), beer);
                 }
