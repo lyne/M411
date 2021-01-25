@@ -38,7 +38,7 @@ public class BeerAdmin {
      * @return The StringBuilder toString()
      * @throws IOException when there's an error reading the response
      */
-    private static String readAll(Reader rd) throws IOException {
+    private String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
         while ((cp = rd.read()) != -1) {
